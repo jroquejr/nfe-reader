@@ -8,11 +8,14 @@ black = "==18.6b2"
 "flake8" = "==3.5.0"
 mypy = "*"
 pytest-cov = "==2.7.1"
-pytest-aiohttp = "*"
+pylint = "*"
 
 [packages]
-aiohttp = "==3.5.4"
-aiohttp-jinja2 = "==1.1.2"
+flask = "==1.1.1"
+beautifulsoup4 = "==4.8.0"
+furl = "*"
+requests = "==2.22.0"
+schematics = "==2.1.0"
 
 [requires]
 python_version = "3.7"
