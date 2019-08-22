@@ -1,11 +1,13 @@
 from nfe_reader.crawler import base
 from furl import furl
 from nfe_reader.crawler.utils import get_parsed, parse_form
+from .parser import Parser
 
 
 class Crawler(base.Crawler):
     state = "BA"
     base_url = "http://nfe.sefaz.ba.gov.br/"
+    parser = Parser()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -29,10 +31,11 @@ class Crawler(base.Crawler):
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
             )
             content[name] = tab_response.text
+        return self.parser.parse(content)
 
     def get_tabbed_content(self, url):
         first_page = self.session.get(url)
-        parsed = get_parsed(first_page.html)
+        parsed = get_parsed(first_page.text)
         form_element = parsed.select_one("#form1")
         form_data = parse_form(form_element)
         tabbed_page = self.session.post(
