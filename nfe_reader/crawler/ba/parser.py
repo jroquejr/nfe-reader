@@ -1,3 +1,5 @@
 class Parser:
     def parse(self, content):
-        pass
+        return {
+            "version": 1
+        }
