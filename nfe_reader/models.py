@@ -1,13 +1,13 @@
 from schematics.models import Model
 from schematics.types import (
     BaseType,
-    NumberType,
     DateTimeType,
-    FloatType,
     DecimalType,
-    StringType,
-    ModelType,
+    FloatType,
     ListType,
+    ModelType,
+    NumberType,
+    StringType,
 )
 
 

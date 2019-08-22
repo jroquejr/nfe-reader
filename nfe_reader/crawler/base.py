@@ -1,5 +1,6 @@
+
 from requests import Session
-import typing
+
 
 class Crawler:
     state: str = None

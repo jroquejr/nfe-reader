@@ -1,7 +1,9 @@
 from bs4 import BeautifulSoup, Tag
 
+
 def get_parsed(html, parser="html.parser"):
     return BeautifulSoup(html, parser)
+
 
 def parse_form(form_element: Tag):
     fields = {}
@@ -37,7 +39,10 @@ def parse_form(form_element: Tag):
         if not hasattr(element, "name"):
             continue
 
-        if element_type in ("text", "hidden", "password", "submit", "image") or not element_type:
+        if (
+            element_type in ("text", "hidden", "password", "submit", "image")
+            or not element_type
+        ):
             parse_input(element)
             continue
 
