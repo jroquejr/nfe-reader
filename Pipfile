@@ -10,6 +10,7 @@ mypy = "*"
 pytest-cov = "==2.7.1"
 pylint = "*"
 pytest = "*"
+requests-mock = "*"
 
 [packages]
 flask = "==1.1.1"
