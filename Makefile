@@ -1,7 +1,7 @@
 format:
 	autoflake -r $(AUTOFLAKE_OPTIONS) --remove-unused-variables --remove-all-unused-imports ./nfe_reader ./tests
 	isort -rc . $(ISORT_OPTIONS)
-	black $(BLACK_OPTIONS) ./nfe_reader ./tests 
+	black --exclude '.*/(snapshots|snapshottest)/.*' $(BLACK_OPTIONS) ./nfe_reader ./tests 
 
 check-format: ISORT_OPTIONS := --check-only
 check-format: BLACK_OPTIONS := --check

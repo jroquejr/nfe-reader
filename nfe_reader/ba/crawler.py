@@ -1,7 +1,7 @@
 from furl import furl
 
-from nfe_reader.crawler import base
-from nfe_reader.crawler.utils import get_parsed, parse_form
+from nfe_reader import base
+from nfe_reader.utils import get_parsed, parse_form
 
 from .parser import Parser
 

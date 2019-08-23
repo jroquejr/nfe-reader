@@ -2,7 +2,6 @@ from schematics.models import Model
 from schematics.types import (
     BaseType,
     DateTimeType,
-    DecimalType,
     FloatType,
     ListType,
     ModelType,
@@ -38,10 +37,10 @@ class ProductModel(Model):
 
 
 class NFeModel(Model):
-    access_key = NumberType(required=True)
-    number = NumberType(required=True)
-    datetime = DateTimeType(required=True)
-    total_value = DecimalType(required=True)
-    protocol = NumberType()
+    access_key = StringType(required=True)
+    number = StringType(required=True)
+    issue_date = DateTimeType(required=True)
+    total_value = FloatType(required=True)
+    protocol = StringType()
     emitter = ModelType(EmitterModel)
     products = ListType(ModelType(ProductModel))

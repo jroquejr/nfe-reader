@@ -2,7 +2,7 @@ import re
 
 import requests_mock
 
-from nfe_reader.crawler.ba.crawler import Crawler
+from nfe_reader.ba.crawler import Crawler
 
 
 def test_ba_crawler(html_first_page, html_tabs_view, html_emitter, html_products):
@@ -21,4 +21,3 @@ def test_ba_crawler(html_first_page, html_tabs_view, html_emitter, html_products
         crawler = Crawler()
         result = crawler.search_by_qrcode(url_qrcode)
         assert result
-        assert result.get("version")
