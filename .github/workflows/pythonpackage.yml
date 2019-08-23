@@ -22,9 +22,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install pipenv
         pipenv install --dev --system
-    - name: Checking code format
+    - name: Checking code and run tests
       run: |
-        make format
-    - name: Test with pytest
-      run: |
-        make test
+        make check-format test
