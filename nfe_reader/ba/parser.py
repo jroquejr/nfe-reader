@@ -4,8 +4,8 @@ from decimal import Decimal
 import dateparser
 from superslug import slugify
 
-from nfe_reader.utils import get_parsed
 from nfe_reader.models import NFeModel
+from nfe_reader.utils import get_parsed
 
 
 class Parser:
@@ -24,7 +24,6 @@ class Parser:
                 "number": nfe_dict.get("numero"),
                 "issue_date": self.extract_issue_date(nfe_dict),
                 "total_value": self.extract_total_value(nfe_dict),
-                "protocol": nfe_dict.get("protocolo")
             }
         )
 

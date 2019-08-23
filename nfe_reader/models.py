@@ -1,5 +1,6 @@
 from schematics.models import Model
-from schematics.types import DateTimeType, FloatType, StringType, NumberType
+from schematics.types import BaseType, DateTimeType, FloatType, NumberType, StringType
+
 
 class EmitterModel(Model):
     name = StringType(required=True)
