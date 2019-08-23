@@ -24,6 +24,7 @@ class Parser:
                 "number": nfe_dict.get("numero"),
                 "issue_date": self.extract_issue_date(nfe_dict),
                 "total_value": self.extract_total_value(nfe_dict),
+                "protocol": nfe_dict.get("protocolo")
             }
         )
 
