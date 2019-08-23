@@ -5,11 +5,13 @@ verify_ssl = true
 
 [dev-packages]
 black = "==18.6b2"
-"flake8" = "==3.5.0"
+flake8 = "*"
 mypy = "*"
 pytest-cov = "==2.7.1"
 pylint = "*"
 pytest = "*"
+autoflake = "*"
+isort = "*"
 requests-mock = "*"
 
 [packages]

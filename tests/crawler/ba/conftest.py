@@ -1,5 +1,6 @@
-from tests.util import load_file
 from pytest import fixture
+
+from tests.util import load_file
 
 
 @fixture(scope="module")
