@@ -34,5 +34,5 @@ class NFeModel(Model):
     issue_date = DateTimeType(required=True)
     total_value = FloatType(required=True)
     protocol = StringType()
-    # emitter = ModelType(EmitterModel)
-    # products = ListType(ModelType(ProductModel))
+    emitter = ModelType(EmitterModel)
+    products = ListType(ModelType(ProductModel))
