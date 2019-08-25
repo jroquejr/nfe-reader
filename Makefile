@@ -9,4 +9,9 @@ check-format: format
 	flake8 ./nfe_reader
 
 test: check-format
-	pytest . --cov=.
+	pytest . --cov=. $(PYTEST_OPTIONS)
+
+
+coverage: PYTEST_OPTIONS := --cov-report html
+coverage: test
+	open htmlcov/index.html

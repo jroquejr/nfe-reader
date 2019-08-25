@@ -1,0 +1,49 @@
+<form id="contact-form" action="script.php" method="post">
+    <input type="hidden" name="redirect" value="http://www.opera.com" />
+    <ul>
+        <li>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="" />
+        </li>
+        <li>
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" value="" />
+        </li>
+        <li>
+            <label for="email">Radio:</label>
+            <input type="radio" name="radio_input" value="1" checked />
+            <input type="radio" name="radio_input" value="2" />
+        </li>
+        <li>
+            <label for="comments">Comments:</label>
+            <textarea name="comments" id="comments" cols="25" rows="3"></textarea>
+        </li>
+        <li>
+            <label>Select Único:</label>
+            <select name="select_field">
+                <option value="1">Valor 1</option>
+                <option value="2">Valor 2</option>
+                <option value="3" selected>Valor 3</option>
+            </select>
+
+            <label>Select Sem Seleção:</label>
+            <select name="select_field">
+                <option value="a1">V1</option>
+                <option value="a2">V2</option>
+                <option value="a3">V3</option>
+            </select>
+        </li>
+        <li>
+            <label>Select Multiplo:</label>
+            <select name="select_multiple" multiple>
+                <option value="a">Valor A</option>
+                <option value="b" selected>Valor B</option>
+                <option value="c" selected>Valor C</option>
+            </select>
+        </li>
+        <li>
+            <input type="submit" value="submit" />
+            <input type="reset" value="reset" />
+        </li>
+    </ul>
+</form>
