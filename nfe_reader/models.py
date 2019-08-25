@@ -5,20 +5,20 @@ from schematics.types import (
     FloatType,
     ListType,
     ModelType,
-    NumberType,
+    IntType,
     StringType,
 )
 
 
 class EmitterModel(Model):
     name = StringType(required=True)
-    cnpj = NumberType(required=True)
+    cnpj = IntType(required=True)
     uf = StringType(max_length=2, required=True)
     fantasy_name = StringType()
-    state_reg = NumberType()
+    state_reg = IntType()
     address = StringType()
     district = StringType()
-    zipcode = NumberType()
+    zipcode = IntType()
     city_code = StringType()
     city_name = StringType()
 
