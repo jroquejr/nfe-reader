@@ -5,12 +5,10 @@ import requests_mock
 from nfe_reader.ba.crawler import Crawler
 
 
-def test_ba_crawler(html_first_page, html_tabs_view, html_emitter, html_products):
+def test_ba_crawler(html_first_page, html_nfe, html_emitter, html_products):
     with requests_mock.mock() as m:
         m.register_uri("GET", re.compile("qrcode.aspx"), text=html_first_page)
-        m.register_uri(
-            "POST", re.compile("NFCEC_consulta_danfe.aspx"), text=html_tabs_view
-        )
+        m.register_uri("POST", re.compile("NFCEC_consulta_danfe.aspx"), text=html_nfe)
         m.register_uri(
             "POST",
             re.compile("NFCEC_consulta_abas.aspx"),

@@ -5,6 +5,14 @@ def get_parsed(html, parser="html.parser"):
     return BeautifulSoup(html, parser)
 
 
+def super_strip(text):
+    return " ".join([t.strip() for t in text.splitlines()])
+
+
+def force_float(text):
+    return float(text.replace(",", ".")) if text else None
+
+
 def parse_form(form_element: Tag):
     fields = {}
 
