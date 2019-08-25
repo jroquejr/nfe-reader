@@ -5,7 +5,7 @@ import dateparser
 from superslug import slugify
 
 from nfe_reader.models import EmitterModel, NFeModel, ProductModel
-from nfe_reader.utils import get_parsed, super_strip, force_float
+from nfe_reader.utils import force_float, get_parsed, super_strip
 
 
 class Parser:
@@ -13,8 +13,14 @@ class Parser:
         parsed_content = {k: get_parsed(v) for k, v in content.items()}
 
         nfe_dict = {}
-        nfe_dict.update(self.extract_as_dict(parsed_content["nfe"].select("#NFe tr td label")))
-        nfe_dict.update(self.extract_as_dict(parsed_content["emitente"].select("#Emitente tr td label")))
+        nfe_dict.update(
+            self.extract_as_dict(parsed_content["nfe"].select("#NFe tr td label"))
+        )
+        nfe_dict.update(
+            self.extract_as_dict(
+                parsed_content["emitente"].select("#Emitente tr td label")
+            )
+        )
 
         city_parts = nfe_dict.get("municipio").split("-")
 
@@ -29,7 +35,9 @@ class Parser:
                         "name": nfe_dict.get("nome-razao-social"),
                         "fantasy_name": nfe_dict.get("nome-fantasia"),
                         "cnpj": self.only_numbers(nfe_dict.get("cnpj")),
-                        "state_reg": self.only_numbers(nfe_dict.get("inscricao-estadual")),
+                        "state_reg": self.only_numbers(
+                            nfe_dict.get("inscricao-estadual")
+                        ),
                         "address": super_strip(nfe_dict.get("endereco", "")),
                         "district": nfe_dict.get("bairro-distrito"),
                         "uf": nfe_dict.get("uf"),
@@ -38,7 +46,7 @@ class Parser:
                         "city_name": city_parts[1].strip(),
                     }
                 ),
-                "products": self.extract_products(parsed_content.get("produtos"))
+                "products": self.extract_products(parsed_content.get("produtos")),
             }
         )
 
@@ -47,7 +55,7 @@ class Parser:
         if element:
             return element.get(attribute)
 
-    def extract_as_dict(self, rows):    
+    def extract_as_dict(self, rows):
         nfe_dict = {}
         for label in rows:
             value_row = label.find_next("span")
@@ -83,19 +91,22 @@ class Parser:
     def extract_product(self, element):
         rows = element.select("table tr td label")
         product_dict = self.extract_as_dict(rows)
-        return ProductModel({
-            "description": product_dict.get("descricao"),
-            "quantity": force_float(product_dict.get("qtd")),
-            "business_unity": product_dict.get("unidade-comercial"),
-            "total_value": force_float(product_dict.get("valor-r")),
-            "unit_value": force_float(product_dict.get("valor-unitario-de-comercializacao")),
-            "product_code": product_dict.get("codigo-do-produto"),
-            "ncm_code": product_dict.get("codigo-ncm"),
-            "cfop": product_dict.get("cfop"),
-            "total_tax": product_dict.get("valor-aproximado-dos-tributos"),
-            "metadata": {
-                "code_anp": product_dict.get("codigo-do-produto-da-anp"),
-                "uf": product_dict.get("uf-de-consumo"),
-            },
-        })
-
+        return ProductModel(
+            {
+                "description": product_dict.get("descricao"),
+                "quantity": force_float(product_dict.get("qtd")),
+                "business_unity": product_dict.get("unidade-comercial"),
+                "total_value": force_float(product_dict.get("valor-r")),
+                "unit_value": force_float(
+                    product_dict.get("valor-unitario-de-comercializacao")
+                ),
+                "product_code": product_dict.get("codigo-do-produto"),
+                "ncm_code": product_dict.get("codigo-ncm"),
+                "cfop": product_dict.get("cfop"),
+                "total_tax": product_dict.get("valor-aproximado-dos-tributos"),
+                "metadata": {
+                    "code_anp": product_dict.get("codigo-do-produto-da-anp"),
+                    "uf": product_dict.get("uf-de-consumo"),
+                },
+            }
+        )

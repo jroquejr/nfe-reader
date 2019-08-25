@@ -3,9 +3,9 @@ from schematics.types import (
     BaseType,
     DateTimeType,
     FloatType,
+    IntType,
     ListType,
     ModelType,
-    IntType,
     StringType,
 )
 

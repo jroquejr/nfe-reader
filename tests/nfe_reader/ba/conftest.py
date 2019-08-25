@@ -7,9 +7,11 @@ from tests.util import load_file
 def html_first_page():
     return load_file("crawler_ba/fixture-first-page.html")
 
+
 @fixture(scope="module")
 def html_nfe():
     return load_file("crawler_ba/nfe.html")
+
 
 @fixture(scope="module")
 def html_emitter():
