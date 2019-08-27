@@ -44,7 +44,7 @@ class Crawler(base.Crawler):
         form_data = parse_form(form_element)
         partial_url = form_element.get("action").replace("./", "")
         tabbed_page = self.session.post(
-            furl(first_page.url).join(partial_url).url, 
+            furl(first_page.url).join(partial_url).url,
             data=form_data,
             headers={"Content-Type": "application/x-www-form-urlencoded"},
         )

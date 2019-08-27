@@ -103,7 +103,9 @@ class Parser:
                 "product_code": product_dict.get("codigo-do-produto"),
                 "ncm_code": product_dict.get("codigo-ncm"),
                 "cfop": product_dict.get("cfop"),
-                "total_tax": force_float(product_dict.get("valor-aproximado-dos-tributos")),
+                "total_tax": force_float(
+                    product_dict.get("valor-aproximado-dos-tributos")
+                ),
                 "metadata": {
                     "code_anp": product_dict.get("codigo-do-produto-da-anp"),
                     "uf": product_dict.get("uf-de-consumo"),
