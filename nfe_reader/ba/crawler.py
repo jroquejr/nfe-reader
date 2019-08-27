@@ -52,8 +52,8 @@ class Crawler(base.Crawler):
 
     def check_return_from_server(self, html):
         if (
-            "Ocorreu um erro no processamento da página: Problemas na leitura dos dados da NFC-e"
-            in html
+            "Ocorreu um erro no processamento da página" in html
+            and "Problemas na leitura dos dados da NFC-e" in html
         ):
             raise UnavailableServerException()
 
