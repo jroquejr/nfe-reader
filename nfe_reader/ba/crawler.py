@@ -21,7 +21,7 @@ class Crawler(base.Crawler):
         tabbed_page = self.get_tabbed_content(url)
         content = {"nfe": tabbed_page}
         parsed = get_parsed(tabbed_page)
-        form_data = parse_form(parsed.select_one("Form"))
+        form_data = parse_form(parsed.select_one("form"))
         tab_list = [("emitente", 27, 10), ("produtos", 64, 7)]
         for name, x, y in tab_list:
             post_data = dict(form_data)
@@ -32,15 +32,21 @@ class Crawler(base.Crawler):
                 data=post_data,
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
             )
+            tab_response.raise_for_status()
             content[name] = tab_response.text
         return self.parser.parse(content)
 
     def get_tabbed_content(self, url):
         first_page = self.session.get(url)
+        first_page.raise_for_status()
         parsed = get_parsed(first_page.text)
-        form_element = parsed.select_one("#form1")
+        form_element = parsed.find("form")
         form_data = parse_form(form_element)
+        partial_url = form_element.get("action").replace("./", "")
         tabbed_page = self.session.post(
-            furl(self.base_url).join(form_element.get("action")).url, data=form_data
+            furl(first_page.url).join(partial_url).url,
+            data=form_data,
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
         )
+        tabbed_page.raise_for_status()
         return tabbed_page.text
