@@ -23,7 +23,7 @@ def nfe_reader():
         BaCrawler = UF_CRAWLERS.get("ba")
         crawler = BaCrawler()
         result = crawler.search_by_qrcode(url_qrcode)
-    except:
+    except Exception:
         return {"message": "Couldnt read the URL"}, 500
 
     return {"data": result}
