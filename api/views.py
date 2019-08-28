@@ -26,4 +26,4 @@ def nfe_reader():
     except Exception:
         return {"message": "Couldnt read the URL"}, 500
 
-    return {"data": result}
+    return {"data": result.to_primitive()}
