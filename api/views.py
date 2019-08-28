@@ -20,8 +20,7 @@ def nfe_reader():
         return {"message": "Missing URL QRCODE"}, 400
 
     try:
-        BaCrawler = UF_CRAWLERS.get("ba")
-        crawler = BaCrawler()
+        crawler = UF_CRAWLERS.get("ba")()
         result = crawler.search_by_qrcode(url_qrcode)
     except Exception:
         return {"message": "Couldnt read the URL"}, 500
