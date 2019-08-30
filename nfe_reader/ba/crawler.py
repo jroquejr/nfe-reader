@@ -1,6 +1,7 @@
 from furl import furl
 
 from nfe_reader import base
+from nfe_reader.exceptions import InvalidQRCode, UnavailableServerException
 from nfe_reader.utils import get_parsed, parse_form
 
 from .parser import Parser
@@ -32,13 +33,12 @@ class Crawler(base.Crawler):
                 data=post_data,
                 headers={"Content-Type": "application/x-www-form-urlencoded"},
             )
-            tab_response.raise_for_status()
             content[name] = tab_response.text
         return self.parser.parse(content)
 
     def get_tabbed_content(self, url):
         first_page = self.session.get(url)
-        first_page.raise_for_status()
+        self.check_return_from_server(first_page.text)
         parsed = get_parsed(first_page.text)
         form_element = parsed.find("form")
         form_data = parse_form(form_element)
@@ -48,5 +48,17 @@ class Crawler(base.Crawler):
             data=form_data,
             headers={"Content-Type": "application/x-www-form-urlencoded"},
         )
-        tabbed_page.raise_for_status()
         return tabbed_page.text
+
+    def check_return_from_server(self, html):
+        if (
+            "Ocorreu um erro no processamento da página" in html
+            and "Problemas na leitura dos dados da NFC-e" in html
+        ):
+            raise UnavailableServerException()
+
+        if (
+            "Problema(s) apresentado(s) no QR Code" in html
+            and "Versão do QR Code não preenchida" in html
+        ):
+            raise InvalidQRCode()

@@ -21,3 +21,8 @@ def html_emitter():
 @fixture(scope="module")
 def html_products():
     return load_file("crawler_ba/products.html")
+
+
+@fixture(scope="module")
+def html_server_error():
+    return load_file("crawler_ba/server-error.html")
