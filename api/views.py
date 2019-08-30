@@ -14,7 +14,8 @@ def healthcheck():
 
 @blueprint.route("/", methods=("POST",))
 def nfe_reader():
-    url_qrcode = request.json.get("url_qrcode")
+    data = request.json or {}
+    url_qrcode = data.get("url_qrcode")
 
     if not url_qrcode:
         return {"message": "Missing URL QRCODE"}, 400
