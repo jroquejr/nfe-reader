@@ -16,3 +16,4 @@ API to read data from NFE coupon.
 1. Run automatic code format and sort imports: `make format`
 2. Run the *tests*: `make test`
 3. Check the tests coverage with html report: `make coverage`
+4. Run the API locally: `python run.py`
