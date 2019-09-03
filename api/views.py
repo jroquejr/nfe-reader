@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Blueprint, request
 
-from nfe_reader import UF_CRAWLERS
+from nfe_reader.ba.crawler import Crawler
 
 blueprint = Blueprint("api", __name__)
 
@@ -21,7 +21,7 @@ def nfe_reader():
         return {"message": "Missing URL QRCODE"}, 400
 
     try:
-        crawler = UF_CRAWLERS.get("ba")()
+        crawler = Crawler()
         result = crawler.search_by_qrcode(url_qrcode)
     except Exception:
         return {"message": "Couldnt read the URL"}, 500
