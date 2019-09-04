@@ -1,10 +1,5 @@
 from unittest.mock import patch
 
-import flask
-import requests
-
-from api.views import nfe_reader
-
 NF_READER_ENDPOINT = "/"
 HEALTH_CHECK_ENDPOINT = "/healthcheck"
 
@@ -26,17 +21,18 @@ def test_api_nfe_reader_with_no_url_code(client):
     assert response.json.get("message") == "Missing URL QRCODE"
 
 
-# @patch("api.views.Crawler")
-# def test_api_nfe_reader_when_get_internal_error(MockCrawler, client, nf_data):
-#     MockCrawler.return_value.search_by_qrcode.return_value.to_primitive.return_value = {
-#         "data": nf_data
-#     }
-#     response = client.post(NF_READER_ENDPOINT, json={"url_qrcode": FAKE_WRONG_NFE_URL})
+@patch("api.views.Crawler")
+def test_api_nfe_reader_when_get_internal_error(MockCrawler, client, nf_data):
+    crawler = MockCrawler()
+    crawler.search_by_qrcode(FAKE_NFE_URL)
+    crawler.search_by_qrcode.assert_called_with(FAKE_NFE_URL)
 
-#     MockCrawler.assert_called_with()
+    MockCrawler.return_value.search_by_qrcode.side_effect = Exception("Boom!")
 
-#     assert response.status_code == 500
-#     # assert response.json.get("message") == "Couldnt read the URL"
+    response = client.post(NF_READER_ENDPOINT, json={"url_qrcode": FAKE_WRONG_NFE_URL})
+
+    assert response.status_code == 500
+    assert response.json.get("message") == "Couldnt read the URL"
 
 
 @patch("api.views.Crawler")
