@@ -17,3 +17,4 @@ API to read data from NFE coupon.
 2. Run the *tests*: `make test`
 3. Check the tests coverage with html report: `make coverage`
 4. Run local crawler (only BA for that moment): `python local_run.py --url <URL>`
+5. Run the API locally: `python run.py`
