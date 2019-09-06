@@ -23,6 +23,7 @@ requests = "==2.22.0"
 schematics = "==2.1.0"
 dateparser = "*"
 superslug = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
