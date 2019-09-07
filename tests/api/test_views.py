@@ -15,6 +15,11 @@ def test_api_healthcheck(client):
     assert response_json.get("status") is True
 
 
+def test_api_nfe_search(client):
+    response = client.get("/search")
+    assert "Use com moderação".encode() in response.data
+
+
 def test_api_nfe_reader_with_no_url_code(client):
     response = client.post(NF_READER_ENDPOINT, json={})
     assert response.status_code == 400
