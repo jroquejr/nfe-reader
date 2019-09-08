@@ -18,3 +18,6 @@ API to read data from NFE coupon.
 3. Check the tests coverage with html report: `make coverage`
 4. Run local crawler (only BA for that moment): `python local_run.py --url <URL>`
 5. Run the API locally: `python run.py`
+6. Run the API using flask on Docker: `docker-compose up -d api-flask`
+7. Run the API using gunicorn on Docker: `docker-compose up -d api-gunicorn`
+8. Run the command line crawler inside Docker: `docker-compose run crawler -h <URL>`
