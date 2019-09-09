@@ -6,7 +6,6 @@ RUN apk add --no-cache --virtual .build-deps gcc musl-dev cython
 
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH $PYTHONPATH:/usr/src/app
-RUN pip install pipenv
 
 COPY Pipfile Pipfile.lock /usr/src/app/
 
